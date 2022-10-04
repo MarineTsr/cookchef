@@ -1,0 +1,40 @@
+/*------------------
+		LAYOUT
+-------------------*/
+@use "theme" as *;
+
+// Global
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: $font-family;
+	line-height: $lineHeight-default;
+	background-color: getColor($theme-colorscheme, light, main);
+	color: getColor($theme-colorscheme, light, text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@for $i from 1 through 6 {
+	h#{$i},
+	.h#{$i} {
+		display: block;
+		margin-bottom: 0.7em;
+		font-weight: $font-weight-bold;
+		line-height: $lineHeight-title;
+	}
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}

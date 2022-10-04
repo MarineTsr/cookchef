@@ -1,0 +1,8 @@
+/*------------------
+		FUNCS
+-------------------*/
+
+// Get color from map
+@function getColor($map, $scheme, $key) {
+	@return map-get(map-get($map, $scheme), $key);
+}

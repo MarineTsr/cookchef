@@ -1,0 +1,34 @@
+/*------------------
+		COLORS
+-------------------*/
+
+$color-primary: #e15f41;
+$color-secondary: #e77f67;
+$color-light: white;
+$color-medium: #ced6e0;
+$color-dark: #2f3542;
+$color-text-dark: black;
+$color-text-light: white;
+
+$theme-colorscheme: (
+	primary: (
+		main: $color-primary,
+		hover: $color-secondary,
+		text: $color-text-light,
+	),
+	secondary: (
+		main: $color-secondary,
+		hover: $color-primary,
+		text: $color-text-dark,
+	),
+	light: (
+		main: $color-light,
+		hover: $color-medium,
+		text: $color-text-dark,
+	),
+	dark: (
+		main: $color-dark,
+		hover: $color-medium,
+		text: $color-text-light,
+	),
+);

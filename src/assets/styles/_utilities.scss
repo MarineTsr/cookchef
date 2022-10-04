@@ -1,0 +1,30 @@
+/*------------------
+		UTILITIES
+-------------------*/
+@use "theme" as *;
+
+// SPACING ---
+$spacer-position: (
+	s: left,
+	e: right,
+	t: top,
+	b: bottom,
+);
+
+// Margins
+@each $key, $value in $spacer-position {
+	@for $i from 1 through 5 {
+		.m#{$key}-#{$i} {
+			margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		}
+	}
+}
+
+// Padding
+@each $key, $value in $spacer-position {
+	@for $i from 1 through 5 {
+		.p#{$key}-#{$i} {
+			padding-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		}
+	}
+}
