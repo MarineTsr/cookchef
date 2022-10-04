@@ -1,6 +1,7 @@
 /*------------------
 		GRID
 -------------------*/
+@use "utilities" as *;
 
 // Global
 .d-flex {
@@ -19,6 +20,14 @@
 	flex: 1 1 auto;
 }
 
+.vw-100 {
+	width: 100vw;
+}
+
+.vh-100 {
+	height: 100vh;
+}
+
 // Alignments
 $flex-align-list: start, end, center, baseline, stretch;
 $flex-justify-list: start, end, center, between, around, evenly;
@@ -35,6 +44,31 @@ $flex-justify-list: start, end, center, between, around, evenly;
 			justify-content: space-#{$justify};
 		} @else {
 			justify-content: $justify;
+		}
+	}
+}
+
+// Row
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+// Columns
+$col-nb-max: 12;
+
+@for $i from 1 through $col-nb-max {
+	.col-#{$i} {
+		width: calc(100% / (#{$col-nb-max} / #{$i}));
+	}
+}
+
+@each $key, $value in $breakpoints-list {
+	@media (min-width: #{$value}) {
+		@for $i from 1 through $col-nb-max {
+			.col-#{$key}-#{$i} {
+				width: calc(100% / (#{$col-nb-max} / #{$i}));
+			}
 		}
 	}
 }

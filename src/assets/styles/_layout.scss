@@ -2,6 +2,7 @@
 		LAYOUT
 -------------------*/
 @use "theme" as *;
+@use "helpers/functions" as fn;
 
 // Global
 * {
@@ -12,8 +13,8 @@ body {
 	margin: 0;
 	font-family: $font-family;
 	line-height: $lineHeight-default;
-	background-color: getColor($theme-colorscheme, light, main);
-	color: getColor($theme-colorscheme, light, text);
+	background-color: fn.getColor($theme-colorscheme, light, main);
+	color: fn.getColor($theme-colorscheme, light, text);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

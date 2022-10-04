@@ -1,9 +1,10 @@
 /*------------------
-		UTILITIES
+		SPACING
 -------------------*/
-@use "theme" as *;
 
-// SPACING ---
+$spacer-unit: 1.5rem;
+$spacer-ratio: 0.25;
+
 $spacer-position: (
 	s: left,
 	e: right,
