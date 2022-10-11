@@ -1,6 +1,7 @@
 /*------------------
 		SPACING
 -------------------*/
+@use "breakpoints" as *;
 
 $spacer-unit: 1.5rem;
 $spacer-ratio: 0.25;
@@ -12,20 +13,36 @@ $spacer-position: (
 	b: bottom,
 );
 
-// Margins
+// Default
 @each $key, $value in $spacer-position {
 	@for $i from 1 through 5 {
+		// Margins
 		.m#{$key}-#{$i} {
 			margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		}
+
+		// Paddings
+		.p#{$key}-#{$i} {
+			padding-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
 		}
 	}
 }
 
-// Padding
-@each $key, $value in $spacer-position {
-	@for $i from 1 through 5 {
-		.p#{$key}-#{$i} {
-			padding-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+// Depending on breakpoints
+@each $bk-key, $bk-value in $breakpoints-list {
+	@media (min-width: #{$bk-value}) {
+		// Margins
+		@each $key, $value in $spacer-position {
+			@for $i from 1 through 5 {
+				.m#{$key}-#{$bk-key}-#{$i} {
+					margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+				}
+
+				// Paddings
+				.p#{$key}-#{$bk-key}-#{$i} {
+					padding-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+				}
+			}
 		}
 	}
 }
