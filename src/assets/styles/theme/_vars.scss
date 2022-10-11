@@ -2,6 +2,27 @@
 		VARS
 -------------------*/
 
+// Header
+$header-px: 30px;
+$header-py: 3px;
+$header-logo-w: 200px;
+
+// Footer
+$footer-px: 30px;
+$footer-py: 3px;
+
+// Buttons
+$btn-border-width: 1px;
+$btn-px: 7px;
+$btn-px-xl: 11px;
+$btn-py: 5px;
+$btn-py-xl: 7px;
+$btn-radius: 5px;
+$btn-icon-w: 15px;
+$btn-icon-w-xl: 17px;
+
 // Box shadows
-$shadow-default: 0 6px 9px 0 rgba(0, 0, 0, 0.15);
-$shadow-nav: 0 6px 9px 0 rgba(0, 0, 0, 0.15);
+$shadow-header: 0 0 5px rgba(0, 0, 0, 0.2);
+
+// Transitions
+$transition-default: all 0.25s ease-in-out;

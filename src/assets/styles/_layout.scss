@@ -9,20 +9,29 @@
 	box-sizing: border-box;
 }
 
+html {
+	font-size: $font-size-ratio;
+}
+
 body {
 	margin: 0;
 	font-family: $font-family;
+	font-size: $font-size-sm;
 	line-height: $lineHeight-default;
 	background-color: fn.getColor($theme-colorscheme, light, main);
 	color: fn.getColor($theme-colorscheme, light, text);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+
+	@media (min-width: map-get($breakpoints-list, lg)) {
+		font-size: $font-size-md;
+	}
 }
 
 @for $i from 1 through 6 {
 	h#{$i},
 	.h#{$i} {
 		display: block;
+		margin: 0;
+		padding: 0;
 		margin-bottom: 0.7em;
 		font-weight: $font-weight-bold;
 		line-height: $lineHeight-title;

@@ -1,0 +1,76 @@
+/*------------------
+		BUTTONS
+-------------------*/
+@use "../theme" as *;
+
+// GLOBAL ---
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: $btn-py $btn-px;
+	border-radius: $btn-radius;
+	appearance: none;
+	font-size: inherit;
+	text-align: center;
+	border: solid $btn-border-width transparent;
+	cursor: pointer;
+	transition: $transition-default;
+
+	svg {
+		width: $btn-icon-w;
+		height: $btn-icon-w;
+	}
+
+	@media (min-width: map-get($breakpoints-list, lg)) {
+		padding: $btn-py-xl $btn-px-xl;
+
+		svg {
+			width: $btn-icon-w-xl;
+			height: $btn-icon-w-xl;
+		}
+	}
+}
+
+// COLORS ---
+@each $key, $value in $theme-colorscheme {
+	// Filled
+	.btn--filled {
+		&.btn--#{$key} {
+			color: map-get($value, "text");
+			background-color: map-get($value, "main");
+			border: solid 1px map-get($value, "main");
+
+			.icon:not(.no-custom) {
+				fill: map-get($value, "text") !important;
+			}
+
+			&:hover {
+				background-color: map-get($value, "hover");
+				border: solid 1px map-get($value, "hover");
+			}
+		}
+	}
+
+	// Outlined
+	.btn--outlined {
+		&.btn--#{$key} {
+			color: map-get($value, "main");
+			background-color: transparent;
+			border: solid 1px map-get($value, "main");
+
+			svg {
+				fill: map-get($value, "main") !important;
+			}
+
+			&:hover {
+				color: map-get($value, "text");
+				background-color: map-get($value, "main");
+
+				svg {
+					fill: map-get($value, "text") !important;
+				}
+			}
+		}
+	}
+}

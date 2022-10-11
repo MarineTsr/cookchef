@@ -1,0 +1,22 @@
+/*------------------
+		HEADER
+-------------------*/
+@use "../../src/assets/styles/theme" as *;
+@use "../../src/assets/styles/helpers/functions" as fn;
+
+.headerMain {
+	padding: $header-py $header-px;
+	box-shadow: $shadow-header;
+	background-color: fn.getColor($theme-colorscheme, primary, text);
+	color: fn.getColor($theme-colorscheme, primary, main);
+
+	&__logo {
+		flex-grow: 1;
+		text-align: center;
+
+		img {
+			width: $header-logo-w;
+			height: auto;
+		}
+	}
+}

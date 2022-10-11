@@ -1,0 +1,14 @@
+/*------------------
+	ALIGNMENT
+-------------------*/
+@use "../theme" as *;
+
+// TEXT ALIGN ---
+$alignment-text: start, center, end;
+
+// Default
+@each $align in $alignment-text {
+	.text-#{$align} {
+		text-align: $align;
+	}
+}

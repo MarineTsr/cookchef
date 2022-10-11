@@ -1,21 +1,21 @@
 /*------------------
 		SPACING
 -------------------*/
-@use "breakpoints" as *;
+@use "../theme" as *;
 
 $spacer-unit: 1.5rem;
 $spacer-ratio: 0.25;
 
 $spacer-position: (
-	s: left,
-	e: right,
+	l: left,
+	r: right,
 	t: top,
 	b: bottom,
 );
 
 // Default
 @each $key, $value in $spacer-position {
-	@for $i from 1 through 5 {
+	@for $i from 0 through 5 {
 		// Margins
 		.m#{$key}-#{$i} {
 			margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
@@ -33,7 +33,7 @@ $spacer-position: (
 	@media (min-width: #{$bk-value}) {
 		// Margins
 		@each $key, $value in $spacer-position {
-			@for $i from 1 through 5 {
+			@for $i from 0 through 5 {
 				.m#{$key}-#{$bk-key}-#{$i} {
 					margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
 				}
