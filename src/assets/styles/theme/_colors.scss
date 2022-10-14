@@ -5,7 +5,7 @@
 $color-primary: #e15f41;
 $color-secondary: #e77f67;
 $color-light: white;
-$color-medium: #ced6e0;
+$color-medium: #edeff1;
 $color-dark: #2f3542;
 $color-text-dark: black;
 $color-text-light: white;
@@ -24,6 +24,11 @@ $theme-colorscheme: (
 	light: (
 		main: $color-light,
 		hover: $color-medium,
+		text: $color-text-dark,
+	),
+	medium: (
+		main: $color-medium,
+		hover: $color-light,
 		text: $color-text-dark,
 	),
 	dark: (

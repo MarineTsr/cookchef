@@ -22,7 +22,13 @@ $btn-icon-w: 15px;
 $btn-icon-w-xl: 17px;
 
 // Box shadows
-$shadow-header: 0 0 5px rgba(0, 0, 0, 0.2);
+$shadow-header: 0 0 5px rgba(0, 0, 0, 0.4);
+
+// Spacing
+$gutter-default: 15px;
+
+// Radius
+$radius-default: 5px;
 
 // Transitions
 $transition-default: all 0.25s ease-in-out;

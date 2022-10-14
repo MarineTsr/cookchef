@@ -1,0 +1,27 @@
+/*------------------
+		MAIN
+-------------------*/
+@use "../../src/assets/styles/theme" as *;
+@use "../../src/assets/styles/helpers/functions" as fn;
+
+.mainContent {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: fn.getColor($theme-colorscheme, medium, main);
+	color: fn.getColor($theme-colorscheme, medium, text);
+}
+
+.recipeList {
+	border-radius: $radius-default;
+	background-color: fn.getColor($theme-colorscheme, light, main);
+	color: fn.getColor($theme-colorscheme, light, text);
+}
+
+.recipeItem__container {
+	display: flex;
+	flex-direction: column;
+	min-height: 200px;
+	height: 100%;
+	border: solid 1px $color-primary;
+	border-radius: $radius-default;
+}

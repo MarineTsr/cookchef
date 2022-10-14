@@ -13,7 +13,40 @@ $spacer-position: (
 	b: bottom,
 );
 
-// Default
+// All directions + x/y axis
+@for $i from 0 through 5 {
+	// Margins
+	.m-#{$i} {
+		margin: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+
+	.mx-#{$i} {
+		margin-left: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		margin-right: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+
+	.my-#{$i} {
+		margin-top: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		margin-bottom: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+
+	// Paddings
+	.p-#{$i} {
+		padding: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+
+	.px-#{$i} {
+		padding-left: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		padding-right: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+
+	.py-#{$i} {
+		padding-top: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+		padding-bottom: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+	}
+}
+
+// Specific direction
 @each $key, $value in $spacer-position {
 	@for $i from 0 through 5 {
 		// Margins
@@ -34,13 +67,26 @@ $spacer-position: (
 		// Margins
 		@each $key, $value in $spacer-position {
 			@for $i from 0 through 5 {
+				// MARINGS
+				// Specific direction + breakpoint
 				.m#{$key}-#{$bk-key}-#{$i} {
 					margin-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
 				}
 
-				// Paddings
+				// All direction + breakpoint
+				.m-#{$bk-key}-#{$i} {
+					margin: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+				}
+
+				// PADDINGS
+				// Specific direction + breakpoint
 				.p#{$key}-#{$bk-key}-#{$i} {
 					padding-#{$value}: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
+				}
+
+				// All direction + breakpoint
+				.p-#{$bk-key}-#{$i} {
+					padding: calc(#{$spacer-unit} * #{$spacer-ratio} * #{$i});
 				}
 			}
 		}

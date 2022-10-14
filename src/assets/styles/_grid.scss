@@ -55,12 +55,28 @@ $flex-justify-list: start, end, center, between, around, evenly;
 	flex-wrap: wrap;
 }
 
-// Columns
+// Columns + container
+.container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 $gutter-default;
+}
+
 $col-nb-max: 12;
+$container-wmax-list: (
+	xs: 100%,
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1580px,
+	xxl: 1580px,
+);
 
 @for $i from 1 through $col-nb-max {
 	.col-#{$i} {
 		width: calc(100% / (#{$col-nb-max} / #{$i}));
+		padding: $gutter-default;
 	}
 }
 
@@ -71,5 +87,9 @@ $col-nb-max: 12;
 				width: calc(100% / (#{$col-nb-max} / #{$i}));
 			}
 		}
+	}
+
+	.container {
+		max-width: map-get($container-wmax-list, $key);
 	}
 }

@@ -5,6 +5,8 @@
 @use "../../src/assets/styles/helpers/functions" as fn;
 
 .headerMain {
+	position: relative;
+	z-index: 1;
 	padding: $header-py $header-px;
 	box-shadow: $shadow-header;
 	background-color: fn.getColor($theme-colorscheme, primary, text);
