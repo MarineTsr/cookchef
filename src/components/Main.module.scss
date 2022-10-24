@@ -16,12 +16,3 @@
 	background-color: fn.getColor($theme-colorscheme, light, main);
 	color: fn.getColor($theme-colorscheme, light, text);
 }
-
-.recipeItem__container {
-	display: flex;
-	flex-direction: column;
-	min-height: 200px;
-	height: 100%;
-	border: solid 1px $color-primary;
-	border-radius: $radius-default;
-}

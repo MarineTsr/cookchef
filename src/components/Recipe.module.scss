@@ -1,0 +1,49 @@
+/*------------------
+		RECIPE
+-------------------*/
+@use "../../src/assets/styles/theme" as *;
+@use "../../src/assets/styles/helpers/functions" as fn;
+
+.recipeItem__container {
+	display: flex;
+	flex-direction: column;
+	min-height: 200px;
+	height: 100%;
+	border: solid 1px $color-primary;
+	border-radius: $radius-default;
+	cursor: pointer;
+
+	&:hover {
+		&:hover {
+			.recipeItem__img img {
+				transform: scale(1.05);
+			}
+		}
+
+		.recipeItem__title {
+			color: $color-secondary;
+		}
+	}
+}
+
+.recipeItem__img {
+	width: 100%;
+	height: $recipe-img-h;
+	border-top-left-radius: $radius-default;
+	border-top-right-radius: $radius-default;
+	overflow: hidden;
+
+	img {
+		min-width: 100%;
+		min-height: 100%;
+		max-width: $recipe-img-wmax;
+		width: auto;
+		height: auto;
+		transition: $transition-default;
+	}
+}
+
+.recipeItem__title {
+	font-weight: $font-weight-medium;
+	transition: $transition-default;
+}
