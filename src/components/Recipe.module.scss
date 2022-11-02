@@ -27,6 +27,7 @@
 }
 
 .recipeItem__img {
+	position: relative;
 	width: 100%;
 	height: $recipe-img-h;
 	border-top-left-radius: $radius-default;
@@ -40,6 +41,18 @@
 		width: auto;
 		height: auto;
 		transition: $transition-default;
+	}
+}
+
+.recipeItem__favorite {
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	left: 10px;
+
+	svg {
+		width: $recipe-icon-w;
+		height: $recipe-icon-w;
 	}
 }
 

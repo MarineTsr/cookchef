@@ -16,6 +16,11 @@ $theme-colorscheme: (
 		hover: $color-secondary,
 		text: $color-text-light,
 	),
+	primaryReverse: (
+		main: $color-text-light,
+		hover: $color-medium,
+		text: $color-primary,
+	),
 	secondary: (
 		main: $color-secondary,
 		hover: $color-primary,
