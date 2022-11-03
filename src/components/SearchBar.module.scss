@@ -1,0 +1,28 @@
+/*------------------
+	SEARCH BAR
+-------------------*/
+@use "../../src/assets/styles/theme" as *;
+@use "../../src/assets/styles/helpers/functions" as fn;
+
+.mainSearch {
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+	max-width: $search-wmax;
+	margin: 0 auto;
+	border: solid 1px $color-light;
+	border-radius: $radius-default;
+	overflow: hidden;
+
+	input {
+		flex-grow: 1;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.mainSearchBtn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	cursor: inherit;
+}

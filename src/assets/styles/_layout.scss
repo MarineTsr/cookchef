@@ -48,3 +48,17 @@ ol {
 img {
 	max-width: 100%;
 }
+
+input {
+	height: $input-h;
+	padding: $input-py $input-px;
+	border: none;
+	border-radius: $radius-default;
+	font-family: $font-family;
+	background-color: $color-light;
+	color: $color-text-dark;
+}
+
+::placeholder {
+	font-family: $font-family;
+}
