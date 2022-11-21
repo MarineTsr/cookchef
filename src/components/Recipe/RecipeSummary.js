@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "./Recipe.module.scss";
+import styles from "./RecipeSummary.module.scss";
 
-function Recipe({ id, title, image, favoriteHandler }) {
+function RecipeSummary({ id, title, image, favoriteHandler }) {
   // Favorite state of the recipe
   const [isActive, setIsActive] = useState(false);
 
@@ -28,4 +28,4 @@ function Recipe({ id, title, image, favoriteHandler }) {
   );
 }
 
-export default Recipe;
+export default RecipeSummary;

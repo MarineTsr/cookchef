@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import logo from "../assets/images/cookchef.png";
+import logo from "assets/images/cookchef.png";
 
 function Header() {
   return (

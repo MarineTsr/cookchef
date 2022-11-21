@@ -1,8 +1,8 @@
 /*------------------
 		FOOTER
 -------------------*/
-@use "../../src/assets/styles/theme" as *;
-@use "../../src/assets/styles/helpers/functions" as fn;
+@use "assets/styles/theme" as *;
+@use "assets/styles/helpers/functions" as fn;
 
 .footerMain {
 	padding: $footer-py $footer-py;

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Recipe from "./Recipe";
-import SearchBar from "./SearchBar";
-import styles from "./Main.module.scss";
-import { data } from "../data/recipes";
+import { data } from "data/recipes";
+import RecipeSummary from "components/Recipe/RecipeSummary";
+import SearchBar from "components/SearchBar";
+import styles from "./Home.module.scss";
 
-function Main() {
+function Home() {
   const recipeList = data;
   const [favoriteList, setFavoriteList] = useState([]);
   const [filteredList, setFilteredList] = useState(recipeList);
@@ -54,7 +54,7 @@ function Main() {
           )}
           {filteredList.map((item) => (
             <li key={item.id} className="col-12 col-sm-6 col-md-4 col-xl-3">
-              <Recipe
+              <RecipeSummary
                 id={item.id}
                 title={item.title}
                 image={item.image}
@@ -68,4 +68,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Home;
