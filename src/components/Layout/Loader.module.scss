@@ -1,0 +1,12 @@
+/*-------------
+	LOADER
+--------------*/
+@use "assets/styles/theme" as *;
+
+.loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: $font-size-sm;
+}

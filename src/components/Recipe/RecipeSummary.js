@@ -1,28 +1,23 @@
-import { useState } from "react";
 import styles from "./RecipeSummary.module.scss";
 
-function RecipeSummary({ id, title, image, favoriteHandler }) {
-  // Favorite state of the recipe
-  const [isActive, setIsActive] = useState(false);
-
+function RecipeSummary({ item, favoriteHandler }) {
   return (
     <div className={`${styles.recipeItem__container}`}>
       <div className={`${styles.recipeItem__img}`}>
         <button
           className={`${styles.recipeItem__favorite} btn btn--filled ${
-            isActive ? "btn--primaryReverse" : "btn--primary"
+            item.isFavorite ? "btn--primaryReverse" : "btn--primary"
           }`}
           onClick={() => {
-            setIsActive(!isActive);
-            favoriteHandler(id);
+            favoriteHandler({ ...item, isFavorite: !item.isFavorite });
           }}
         >
           <i className="icon fa-solid fa-heart"></i>
         </button>
-        <img src={image} alt={title} />
+        <img src={item.image} alt={item.title} />
       </div>
       <h3 className={`${styles.recipeItem__title} text-center p-5 mb-0`}>
-        {title}
+        {item.title}
       </h3>
     </div>
   );

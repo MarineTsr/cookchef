@@ -1,26 +1,71 @@
-import { useState } from "react";
-import { data } from "data/recipes";
+import { useState, useEffect, useContext } from "react";
 import RecipeSummary from "components/Recipe/RecipeSummary";
 import SearchBar from "components/SearchBar";
+import Loader from "components/Layout/Loader";
+import ApiContext from "context/ApiContext";
 import styles from "./Home.module.scss";
 
 function Home() {
-  const recipeList = data;
-  const [favoriteList, setFavoriteList] = useState([]);
+  const BASE_URL_API = useContext(ApiContext);
+  const [recipeList, setRecipeList] = useState([]);
   const [filteredList, setFilteredList] = useState(recipeList);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetching datas
+  useEffect(() => {
+    let ignoreResponse = false;
+
+    const getRecipes = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(BASE_URL_API);
+
+        if (response.ok && !ignoreResponse) {
+          const recipes = await response.json();
+
+          // Dyma server returns an array if > 1 todo, otherwise a document
+          setRecipeList(Array.isArray ? recipes : [recipes]);
+          setFilteredList(Array.isArray ? recipes : [recipes]);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getRecipes();
+
+    return () => {
+      ignoreResponse = true;
+    };
+  }, [BASE_URL_API]);
 
   // Favorites
-  const handleFavorite = (id) => {
-    // 1st, check if recipe already exists in favorites list
-    const alreadyFavorite = favoriteList.some((item) => item.id === id);
+  const updateRecipe = async (item) => {
+    try {
+      const { _id, ...recipeRest } = item;
+      const response = await fetch(`${BASE_URL_API}/${item._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(recipeRest),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
 
-    if (alreadyFavorite) {
-      // 2nd, if already exists, remove it from the favorites list
-      setFavoriteList(favoriteList.filter((item) => item.id !== id));
-    } else {
-      // 3rd, if doesn't already exists, add it to the favorites list
-      const newFavorite = recipeList.filter((item) => item.id === id);
-      setFavoriteList([...favoriteList, newFavorite[0]]);
+      if (response.ok) {
+        const recipe = await response.json();
+
+        // Dyma server returns an array if > 1 todo, otherwise a document
+        setRecipeList(
+          recipeList.map((item) => (item._id === recipe._id ? recipe : item))
+        );
+        setFilteredList(
+          recipeList.map((item) => (item._id === recipe._id ? recipe : item))
+        );
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -46,23 +91,26 @@ function Home() {
 
         <SearchBar inputHandler={handleInput} />
 
-        <ul className={`${styles.recipeList} row p-3 mt-5`}>
-          {filteredList.length === 0 && (
-            <li className="col-12 text-center">
-              Aucune recette ne correspond à votre recherche
-            </li>
-          )}
-          {filteredList.map((item) => (
-            <li key={item.id} className="col-12 col-sm-6 col-md-4 col-xl-3">
-              <RecipeSummary
-                id={item.id}
-                title={item.title}
-                image={item.image}
-                favoriteHandler={handleFavorite}
-              />
-            </li>
-          ))}
-        </ul>
+        {isLoading ? (
+          <Loader classes="mt-5 pt-5" />
+        ) : (
+          <ul className={`${styles.recipeList} row p-3 mt-5`}>
+            {filteredList.length === 0 ? (
+              <li className="col-12 text-center">
+                Aucune recette ne correspond à votre recherche
+              </li>
+            ) : (
+              filteredList.map((item) => (
+                <li
+                  key={item._id}
+                  className="col-12 col-sm-6 col-md-4 col-xl-3"
+                >
+                  <RecipeSummary item={item} favoriteHandler={updateRecipe} />
+                </li>
+              ))
+            )}
+          </ul>
+        )}
       </div>
     </main>
   );
