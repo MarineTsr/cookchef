@@ -76,12 +76,6 @@ function Home() {
     }
   };
 
-  // Search
-  const handleInput = (event) => {
-    const filter = event.target.value.trim().toLowerCase();
-    setFilter(filter);
-  };
-
   return (
     <main className={`${styles.mainContent} flex-fill`}>
       <div className="container">
@@ -89,7 +83,7 @@ function Home() {
           Découvrez nos nouvelles recettes
         </h2>
 
-        <SearchBar inputHandler={handleInput} />
+        <SearchBar setFilter={setFilter} />
 
         {isLoading && !recipeList.lenght ? (
           <Loader classes="mt-5 pt-5" />
