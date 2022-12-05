@@ -1,55 +1,24 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import RecipeSummary from "components/Recipe/RecipeSummary";
 import SearchBar from "components/SearchBar";
 import Loader from "components/Layout/Loader";
 import ApiContext from "context/ApiContext";
 import styles from "./Home.module.scss";
+import { useGetData } from "./../../hooks";
 
 function Home() {
   const BASE_URL_API = useContext(ApiContext);
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("");
   const RECIPE_LIST_JUMP = 8;
   const RECIPE_LIST_LENGHT = 40; // Fake value, to prevent fetching results without pagination - to be updated later
-  const [page, setPage] = useState(1);
-  const [recipeList, setRecipeList] = useState([]);
-  const [filter, setFilter] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   // Fetching datas
-  useEffect(() => {
-    let ignoreResponse = false;
-
-    const getRecipes = async () => {
-      try {
-        const response = await fetch(
-          `${BASE_URL_API}?skip=${
-            (page - 1) * RECIPE_LIST_JUMP
-          }&limit=${RECIPE_LIST_JUMP}`
-        );
-
-        if (response.ok && !ignoreResponse) {
-          const recipes = await response.json();
-
-          // Dyma server returns an array if > 1 recipe, otherwise a document
-          // /!\ Use an arrow function in the setter to avoid infinite loop (if setRecipeList has not this func, then recipeList should been added to the dependances) /!\
-          setRecipeList((current) =>
-            Array.isArray(recipes)
-              ? [...current, ...recipes]
-              : [...current, recipes]
-          );
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getRecipes();
-
-    return () => {
-      ignoreResponse = true;
-    };
-  }, [BASE_URL_API, page]);
+  const [[recipeList, setRecipeList], isLoading] = useGetData(
+    BASE_URL_API,
+    page,
+    RECIPE_LIST_JUMP
+  );
 
   // Favorites
   const updateRecipe = async (item) => {
@@ -85,12 +54,13 @@ function Home() {
 
         <SearchBar setFilter={setFilter} />
 
-        {isLoading && !recipeList.lenght ? (
+        {isLoading && !recipeList.length ? (
           <Loader classes="mt-5 pt-5" />
         ) : (
           <div className={`${styles.recipeList}`}>
             <ul className="row p-3 mt-5">
-              {!recipeList.filter((item) =>
+              {filter &&
+              !recipeList.filter((item) =>
                 item.title.toLowerCase().includes(filter)
               ).length ? (
                 <li className="col-12 text-center">
