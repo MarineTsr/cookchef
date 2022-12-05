@@ -21,7 +21,9 @@ function Home() {
   );
 
   // Favorites
-  const updateRecipe = async (item) => {
+  const updateRecipe = async (item, event) => {
+    event.stopProgation();
+
     try {
       const { _id, ...recipeRest } = item;
       const response = await fetch(`${BASE_URL_API}/${item._id}`, {
@@ -38,6 +40,25 @@ function Home() {
         // Dyma server returns an array if > 1 todo, otherwise a document
         setRecipeList(
           recipeList.map((item) => (item._id === recipe._id ? recipe : item))
+        );
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // Deletion
+  const deleteRecipe = async (item, event) => {
+    event.stopProgation();
+
+    try {
+      const response = await fetch(`${BASE_URL_API}/${item._id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setRecipeList(
+          recipeList.filter((currentItem) => currentItem._id !== item._id)
         );
       }
     } catch (e) {
@@ -77,6 +98,7 @@ function Home() {
                       <RecipeSummary
                         item={item}
                         favoriteHandler={updateRecipe}
+                        deleteHandler={deleteRecipe}
                       />
                     </li>
                   ))

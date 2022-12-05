@@ -56,6 +56,18 @@
 	}
 }
 
+.recipeItem__delete {
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+
+	svg {
+		width: $recipe-icon-w;
+		height: $recipe-icon-w;
+	}
+}
+
 .recipeItem__title {
 	font-weight: $font-weight-medium;
 	transition: $transition-default;
