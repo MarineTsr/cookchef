@@ -67,7 +67,7 @@ function Home() {
   };
 
   return (
-    <main className={`${styles.mainContent} flex-fill`}>
+    <main className={`main-content flex-fill`}>
       <div className="container">
         <h2 className="text-center mb-5 pb-3">
           Découvrez nos nouvelles recettes

@@ -62,3 +62,34 @@ input {
 ::placeholder {
 	font-family: $font-family;
 }
+
+.main-content {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: fn.getColor($theme-colorscheme, medium, main);
+	color: fn.getColor($theme-colorscheme, medium, text);
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+.form-label {
+	margin-bottom: 5px;
+	font-size: smaller;
+}
+
+.form-control {
+	border: solid 1px lightgray;
+}
+
+.form-help {
+	margin: 3px 0 0 0;
+	font-size: x-small;
+
+	&.is-danger {
+		color: red;
+	}
+}

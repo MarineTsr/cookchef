@@ -1,12 +1,15 @@
 import styles from "./Header.module.scss";
 import logo from "assets/images/cookchef.png";
 
-function Header() {
+function Header({ setPage }) {
   return (
     <header
       className={`${styles.headerMain} d-flex flex-row align-items-center justify-content-between`}
     >
-      <h1 className={`${styles.headerMain__logo} mb-0`}>
+      <h1
+        className={`${styles.headerMain__logo} mb-0`}
+        onClick={() => setPage("homepage")}
+      >
         <img src={logo} alt="Logo CookChef" />
       </h1>
 
@@ -14,6 +17,15 @@ function Header() {
         <button
           type="button"
           className="btn btn--outlined btn--primary"
+          title="Admin"
+          onClick={() => setPage("admin")}
+        >
+          <i className="icon fa-solid fa-circle-plus"></i>
+          <span className="ml-2 d-none d-sm-inline">Admin</span>
+        </button>
+        <button
+          type="button"
+          className="btn btn--outlined btn--primary ml-3 ml-lg-4"
           title="Ma wishlist"
         >
           <i className="icon fa-solid fa-heart"></i>

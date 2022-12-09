@@ -8,16 +8,16 @@ function RecipeSummary({ item, favoriteHandler, deleteHandler }) {
           className={`${styles.recipeItem__favorite} btn btn--filled ${
             item.isFavorite ? "btn--primaryReverse" : "btn--primary"
           }`}
-          onClick={() => {
-            favoriteHandler({ ...item, isFavorite: !item.isFavorite });
+          onClick={(event) => {
+            favoriteHandler({ ...item, isFavorite: !item.isFavorite }, event);
           }}
         >
           <i className="icon fa-solid fa-heart"></i>
         </button>
         <button
           className={`${styles.recipeItem__delete} btn btn--filled btn--light`}
-          onClick={() => {
-            deleteHandler(item);
+          onClick={(event) => {
+            deleteHandler(item, event);
           }}
         >
           <i className="icon fa-solid fa-xmark"></i>

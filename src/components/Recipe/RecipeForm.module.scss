@@ -1,10 +1,12 @@
 /*------------------
-		HOME
+	RECIPE FORM
 -------------------*/
 @use "assets/styles/theme" as *;
 @use "assets/styles/helpers/functions" as fn;
 
-.recipeList {
+.recipeForm {
+	max-width: 600px;
+	margin: 0 auto;
 	border-radius: $radius-default;
 	background-color: fn.getColor($theme-colorscheme, light, main);
 	color: fn.getColor($theme-colorscheme, light, text);
