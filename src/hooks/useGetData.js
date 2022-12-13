@@ -14,7 +14,7 @@ export const useGetData = (api, page, jump) => {
         if (page && jump) {
           urlParams.append("skip", (page - 1) * jump);
           urlParams.append("limit", jump);
-          urlParams.append("sort", "createdAt:asc");
+          urlParams.append("sort", "createdAt:desc");
         }
 
         const response = await fetch(
