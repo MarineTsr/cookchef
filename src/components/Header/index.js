@@ -1,28 +1,27 @@
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import logo from "assets/images/cookchef.png";
 
-function Header({ setPage }) {
+function Header() {
   return (
     <header
       className={`${styles.headerMain} d-flex flex-row align-items-center justify-content-between`}
     >
-      <h1
-        className={`${styles.headerMain__logo} mb-0`}
-        onClick={() => setPage("homepage")}
-      >
-        <img src={logo} alt="Logo CookChef" />
+      <h1 className={`${styles.headerMain__logo} mb-0`}>
+        <NavLink end to="/" title="CookChef">
+          <img src={logo} alt="Logo CookChef" />
+        </NavLink>
       </h1>
 
       <div className="d-flex ml-4">
-        <button
-          type="button"
-          className="btn btn--outlined btn--primary"
+        <NavLink
+          to="/admin"
+          className="btn btn--outlined btn--primary no-underline"
           title="Admin"
-          onClick={() => setPage("admin")}
         >
           <i className="icon fa-solid fa-circle-plus"></i>
           <span className="ml-2 d-none d-sm-inline">Admin</span>
-        </button>
+        </NavLink>
         <button
           type="button"
           className="btn btn--outlined btn--primary ml-3 ml-lg-4"

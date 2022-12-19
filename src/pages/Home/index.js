@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
-import RecipeSummary from "components/Recipe/RecipeSummary";
 import SearchBar from "components/SearchBar";
 import Loader from "components/Layout/Loader";
+import RecipeSummary from "components/Recipe/RecipeSummary";
 import ApiContext from "context/ApiContext";
+import { useGetData } from "hooks";
 import styles from "./Home.module.scss";
-import { useGetData } from "./../../hooks";
 
 function Home() {
   const BASE_URL_API = useContext(ApiContext);
-  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState(1);
   const [filter, setFilter] = useState("");
   const RECIPE_LIST_JUMP = 8;
   const RECIPE_LIST_LENGHT = 40; // Fake value, to prevent fetching results without pagination - to be updated later
@@ -16,13 +16,13 @@ function Home() {
   // Fetching datas
   const [[recipeList, setRecipeList], isLoading] = useGetData(
     BASE_URL_API,
-    page,
+    pagination,
     RECIPE_LIST_JUMP
   );
 
   // Favorites
   const updateRecipe = async (item, event) => {
-    event.stopProgation();
+    event.stopPropagation();
 
     try {
       const { _id, ...recipeRest } = item;
@@ -37,7 +37,6 @@ function Home() {
       if (response.ok) {
         const recipe = await response.json();
 
-        // Dyma server returns an array if > 1 todo, otherwise a document
         setRecipeList(
           recipeList.map((item) => (item._id === recipe._id ? recipe : item))
         );
@@ -49,7 +48,7 @@ function Home() {
 
   // Deletion
   const deleteRecipe = async (item, event) => {
-    event.stopProgation();
+    event.stopPropagation();
 
     try {
       const response = await fetch(`${BASE_URL_API}/${item._id}`, {
@@ -108,12 +107,13 @@ function Home() {
             {recipeList.filter((item) =>
               item.title.toLowerCase().includes(filter)
             ).length &&
-            page * RECIPE_LIST_JUMP <= RECIPE_LIST_LENGHT - RECIPE_LIST_JUMP ? (
+            pagination * RECIPE_LIST_JUMP <=
+              RECIPE_LIST_LENGHT - RECIPE_LIST_JUMP ? (
               <div className="d-flex justify-content-center pb-5">
                 <button
                   type="button"
                   className="btn btn--filled btn--primary"
-                  onClick={() => setPage(page + 1)}
+                  onClick={() => setPagination(pagination + 1)}
                 >
                   Plus de recettes
                 </button>

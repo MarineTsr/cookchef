@@ -1,9 +1,9 @@
-import styles from "./RecipeForm.module.scss";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import ApiContext from "context/ApiContext";
+import styles from "./RecipeForm.module.scss";
 
 function RecipeForm() {
   const BASE_URL_API = useContext(ApiContext);

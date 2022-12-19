@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useGetData = (api, page, jump) => {
+export const useGetData = (api, pagination, jump) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,8 +11,8 @@ export const useGetData = (api, page, jump) => {
       try {
         const urlParams = new URLSearchParams();
 
-        if (page && jump) {
-          urlParams.append("skip", (page - 1) * jump);
+        if (pagination && jump) {
+          urlParams.append("skip", (pagination - 1) * jump);
           urlParams.append("limit", jump);
           urlParams.append("sort", "createdAt:desc");
         }
@@ -42,7 +42,7 @@ export const useGetData = (api, page, jump) => {
     return () => {
       ignoreResponse = true;
     };
-  }, [api, page, jump]);
+  }, [api, pagination, jump]);
 
   return [[data, setData], isLoading];
 };
