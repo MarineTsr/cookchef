@@ -3,7 +3,7 @@ import SearchBar from "components/SearchBar";
 import Loader from "components/Layout/Loader";
 import RecipeSummary from "components/Recipe/RecipeSummary";
 import ApiContext from "context/ApiContext";
-import { useGetData } from "hooks";
+import { useGetRecipes } from "hooks";
 import styles from "./Home.module.scss";
 
 function Home() {
@@ -14,8 +14,7 @@ function Home() {
   const RECIPE_LIST_LENGHT = 40; // Fake value, to prevent fetching results without pagination - to be updated later
 
   // Fetching datas
-  const [[recipeList, setRecipeList], isLoading] = useGetData(
-    BASE_URL_API,
+  const [[recipeList, setRecipeList], isLoading] = useGetRecipes(
     pagination,
     RECIPE_LIST_JUMP
   );
