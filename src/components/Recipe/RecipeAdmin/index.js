@@ -1,6 +1,14 @@
 import styles from "./RecipeAdmin.module.scss";
+import { deleteRecipe } from "./../../../api/recipes";
 
-function RecipeAdmin({ recipe }) {
+function RecipeAdmin({ recipe, recipes, setRecipes }) {
+  const deleteCurrentRecipe = async () => {
+    const isDeleted = await deleteRecipe(recipe._id);
+    if (isDeleted) {
+      setRecipes(recipes.filter((item) => item._id !== recipe._id));
+    }
+  };
+
   return (
     <div className={`${styles.recipeAdmin__container}`}>
       <p>{recipe.title}</p>
@@ -8,7 +16,11 @@ function RecipeAdmin({ recipe }) {
         <button className="btn btn--filled btn--dark ml-3" title="Modifier">
           <i className="fa-solid fa-pen-to-square"></i>
         </button>
-        <button className="btn btn--outlined btn--dark ml-3" title="Supprimer">
+        <button
+          className="btn btn--outlined btn--dark ml-3"
+          title="Supprimer"
+          onClick={deleteCurrentRecipe}
+        >
           <i className="fa-solid fa-trash"></i>
         </button>
       </div>

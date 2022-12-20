@@ -3,17 +3,21 @@ import { useGetRecipes } from "hooks";
 import RecipeAdmin from "components/Recipe/RecipeAdmin/index";
 
 function AdminRecipesList() {
-  const [[recipeList]] = useGetRecipes();
+  const [[recipes, setRecipes]] = useGetRecipes();
 
   return (
     <div className={`${styles.adminRecipesList} flex-fill`}>
       <h3>Liste des recettes</h3>
 
-      {recipeList && (
+      {recipes && (
         <ul>
-          {recipeList.map((recipe, index) => (
+          {recipes.map((recipe, index) => (
             <li key={recipe._id + index} className="my-3">
-              <RecipeAdmin recipe={recipe} />
+              <RecipeAdmin
+                recipe={recipe}
+                recipes={recipes}
+                setRecipes={setRecipes}
+              />
             </li>
           ))}
         </ul>
