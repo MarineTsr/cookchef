@@ -1,0 +1,21 @@
+/*-------------------------
+		RECIPE ADMIN
+--------------------------*/
+@use "assets/styles/theme" as *;
+@use "assets/styles/helpers/functions" as fn;
+
+.recipeAdmin__container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 $gutter-default;
+	border: solid 1px $color-medium;
+	border-radius: $radius-default;
+}
+
+.recipeAdmin__actions {
+	display: flex;
+	align-items: stretch;
+	justify-content: flex-end;
+}

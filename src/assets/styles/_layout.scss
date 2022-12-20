@@ -97,3 +97,17 @@ input {
 		color: red;
 	}
 }
+
+// COLORS ---
+@each $key, $value in $theme-colorscheme {
+	// Text
+	.text-color--#{$key} {
+		color: map-get($value, "main") !important;
+	}
+
+	// Background
+	.bg-color--#{$key} {
+		color: map-get($value, "text") !important;
+		background-color: map-get($value, "main") !important;
+	}
+}

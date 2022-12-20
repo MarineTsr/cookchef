@@ -1,0 +1,28 @@
+/*----------------------
+	ADMIN RECIPES NAV
+-----------------------*/
+@use "assets/styles/theme" as *;
+@use "assets/styles/helpers/functions" as fn;
+
+.adminRecipesNav {
+	display: flex;
+	align-items: center;
+	margin-bottom: $gutter-default;
+
+	a {
+		display: inline-block;
+		margin: 0 $gutter-default;
+		text-decoration: none;
+		font-weight: $font-weight-medium;
+		color: inherit;
+		transition: $transition-default;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

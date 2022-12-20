@@ -6,7 +6,7 @@ function RecipeSummary({ item, favoriteHandler, deleteHandler }) {
       <div className={`${styles.recipeItem__img}`}>
         <button
           className={`${styles.recipeItem__favorite} btn btn--filled ${
-            item.isFavorite ? "btn--primaryReverse" : "btn--primary"
+            item.isFavorite ? "btn--primary" : "btn--primaryReverse"
           }`}
           onClick={(event) => {
             favoriteHandler({ ...item, isFavorite: !item.isFavorite }, event);

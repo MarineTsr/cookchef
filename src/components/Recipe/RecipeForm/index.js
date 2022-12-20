@@ -69,7 +69,7 @@ function RecipeForm() {
       className={`${styles.recipeForm} p-5`}
       onSubmit={handleSubmit(formSubmit)}
     >
-      <h3 className="pb-5">Ajouter une recette</h3>
+      <h3 className="pb-5">Nouvelle recette</h3>
 
       {errors?.globalErr && (
         <div className="form-group">

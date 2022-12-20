@@ -16,7 +16,11 @@ function Header() {
       <div className="d-flex ml-4">
         <NavLink
           to="/admin"
-          className="btn btn--outlined btn--primary no-underline"
+          className={({ isActive }) =>
+            isActive
+              ? "btn btn--filled btn--primary no-underline"
+              : "btn btn--outlined btn--primary no-underline"
+          }
           title="Admin"
         >
           <i className="icon fa-solid fa-circle-plus"></i>
@@ -32,7 +36,7 @@ function Header() {
         </button>
         <button
           type="button"
-          className="btn btn--filled btn--primary ml-3 ml-lg-4"
+          className="btn btn--outlined btn--primary ml-3 ml-lg-4"
           title="Connexion"
         >
           <i className="fa-solid fa-user"></i>
