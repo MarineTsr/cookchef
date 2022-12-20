@@ -13,10 +13,57 @@ export const getRecipes = async (params) => {
   }
 };
 
-export const getRecipe = async (_id) => {};
+export const getRecipe = async (_id) => {
+  const response = await fetch(`${RECIPE_URL_API}/${_id}`);
 
-export const deleteRecipe = async (_id) => {};
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error(`Fetching recipe #${_id} failed.`);
+  }
+};
 
-export const updateRecipe = async (recipe) => {};
+export const deleteRecipe = async (_id) => {
+  const response = await fetch(`${RECIPE_URL_API}/${_id}`, {
+    method: "DELETE",
+  });
 
-export const createRecipe = async (recipe) => {};
+  if (response.ok) {
+    return true;
+  } else {
+    throw new Error(`Deleting recipe #${_id} failed.`);
+  }
+};
+
+export const updateRecipe = async (recipe) => {
+  const { _id, ...recipeRest } = recipe;
+  const response = await fetch(`${RECIPE_URL_API}/${_id}`, {
+    method: "PATCH",
+    body: JSON.stringify(recipeRest),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error(`Updating recipe #${_id} failed.`);
+  }
+};
+
+export const createRecipe = async (recipe) => {
+  const response = await fetch(RECIPE_URL_API, {
+    method: "POST",
+    body: JSON.stringify(recipe),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error(`Creating recipe failed.`);
+  }
+};

@@ -1,13 +1,15 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import SearchBar from "components/SearchBar";
 import Loader from "components/Layout/Loader";
 import RecipeSummary from "components/Recipe/RecipeSummary";
-import ApiContext from "context/ApiContext";
 import { useGetRecipes } from "hooks";
+import {
+  updateRecipe as apiUpdateRecipe,
+  deleteRecipe as apiDeleteRecipe,
+} from "api";
 import styles from "./Home.module.scss";
 
 function Home() {
-  const BASE_URL_API = useContext(ApiContext);
   const [pagination, setPagination] = useState(1);
   const [filter, setFilter] = useState("");
   const RECIPE_LIST_JUMP = 8;
@@ -23,45 +25,22 @@ function Home() {
   const updateRecipe = async (item, event) => {
     event.stopPropagation();
 
-    try {
-      const { _id, ...recipeRest } = item;
-      const response = await fetch(`${BASE_URL_API}/${item._id}`, {
-        method: "PATCH",
-        body: JSON.stringify(recipeRest),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+    const recipe = await apiUpdateRecipe(item);
 
-      if (response.ok) {
-        const recipe = await response.json();
-
-        setRecipeList(
-          recipeList.map((item) => (item._id === recipe._id ? recipe : item))
-        );
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    setRecipeList(
+      recipeList.map((item) => (item._id === recipe._id ? recipe : item))
+    );
   };
 
   // Deletion
   const deleteRecipe = async (item, event) => {
     event.stopPropagation();
 
-    try {
-      const response = await fetch(`${BASE_URL_API}/${item._id}`, {
-        method: "DELETE",
-      });
+    await apiDeleteRecipe(item._id);
 
-      if (response.ok) {
-        setRecipeList(
-          recipeList.filter((currentItem) => currentItem._id !== item._id)
-        );
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    setRecipeList(
+      recipeList.filter((currentItem) => currentItem._id !== item._id)
+    );
   };
 
   return (

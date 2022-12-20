@@ -1,0 +1,12 @@
+/*-----------
+	ERRORS
+------------*/
+@use "assets/styles/theme" as *;
+@use "assets/styles/helpers/functions" as fn;
+
+.errorWrapper {
+	padding: $error-py $error-px;
+	border: solid 1px $color-error;
+	background-color: $color-error-light;
+	color: $color-error;
+}
