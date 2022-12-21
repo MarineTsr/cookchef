@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createRecipe } from "api";
+import { useNavigate, useLoaderData } from "react-router-dom";
+import { createRecipe, updateRecipe } from "api";
 import styles from "./RecipeForm.module.scss";
 
 function RecipeForm() {
+  const navigate = useNavigate();
+  const currentRecipe = useLoaderData();
+
   const recipeSchema = yup.object({
     title: yup
       .string()
@@ -19,8 +23,8 @@ function RecipeForm() {
   });
 
   const defaultValues = {
-    title: null,
-    image: null,
+    title: currentRecipe ? currentRecipe.title : null,
+    image: currentRecipe ? currentRecipe.image : null,
   };
 
   const {
@@ -39,9 +43,12 @@ function RecipeForm() {
   const formSubmit = async (data, event) => {
     try {
       clearErrors(); // Must clear errors because they won't be deleted automatically if they are not linked to a specific field (ex: global errors)
-      const recipe = createRecipe(data);
 
-      if (recipe) {
+      if (currentRecipe) {
+        await updateRecipe({ _id: currentRecipe._id, ...data });
+        navigate("/admin/recettes/liste");
+      } else {
+        await createRecipe(data);
         reset(defaultValues);
       }
     } catch (err) {
@@ -101,7 +108,7 @@ function RecipeForm() {
           className="btn btn--filled btn--primary"
           disabled={isSubmitting}
         >
-          Ajouter
+          {currentRecipe ? "Modifer" : "Ajouter"}
         </button>
       </div>
     </form>
