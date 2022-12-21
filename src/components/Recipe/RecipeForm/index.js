@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
-import ApiContext from "context/ApiContext";
+import { createRecipe } from "api";
 import styles from "./RecipeForm.module.scss";
 
 function RecipeForm() {
-  const BASE_URL_API = useContext(ApiContext);
-
   const recipeSchema = yup.object({
     title: yup
       .string()
@@ -42,18 +39,9 @@ function RecipeForm() {
   const formSubmit = async (data, event) => {
     try {
       clearErrors(); // Must clear errors because they won't be deleted automatically if they are not linked to a specific field (ex: global errors)
+      const recipe = createRecipe(data);
 
-      const response = await fetch(BASE_URL_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const results = await response.json();
-        console.log(results);
+      if (recipe) {
         reset(defaultValues);
       }
     } catch (err) {
@@ -69,8 +57,6 @@ function RecipeForm() {
       className={`${styles.recipeForm} p-5`}
       onSubmit={handleSubmit(formSubmit)}
     >
-      <h3 className="pb-5">Nouvelle recette</h3>
-
       {errors?.globalErr && (
         <div className="form-group">
           <p className="form-help is-danger">{errors.globalErr.message}</p>
