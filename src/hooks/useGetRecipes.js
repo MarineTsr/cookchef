@@ -11,11 +11,11 @@ export const useGetRecipes = (pagination, jump) => {
     const getRecipesList = async () => {
       try {
         const urlParams = new URLSearchParams();
+        urlParams.append("sort", "createdAt:desc");
 
         if (pagination && jump) {
           urlParams.append("skip", (pagination - 1) * jump);
           urlParams.append("limit", jump);
-          urlParams.append("sort", "createdAt:desc");
         }
 
         const recipesList = await getRecipes(urlParams);

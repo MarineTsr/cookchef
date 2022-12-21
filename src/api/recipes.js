@@ -2,7 +2,10 @@ const RECIPE_URL_API = "https://restapi.fr/api/CookChef";
 
 export const getRecipes = async (params) => {
   const response = await fetch(
-    `${RECIPE_URL_API}${params ? "?" + params : ""}`
+    `${RECIPE_URL_API}${params ? "?" + params : ""}`,
+    {
+      method: "GET",
+    }
   );
 
   if (response.ok) {
