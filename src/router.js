@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import App from "./App";
-import { editRecipeLoader } from "./loaders/editRecipeLoader";
 
 const Error = lazy(() => import("components/Layout/Error"));
 const Home = lazy(() => import("pages/Home"));
@@ -53,7 +52,6 @@ export const router = createBrowserRouter([
               },
               {
                 path: "modifier/:id",
-                loader: editRecipeLoader,
                 element: <AdminRecipesEdit />,
               },
             ],

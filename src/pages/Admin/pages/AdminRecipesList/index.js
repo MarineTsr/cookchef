@@ -1,9 +1,12 @@
 import styles from "./AdminRecipesList.module.scss";
-import { useGetRecipes } from "hooks";
 import RecipeAdmin from "components/Recipe/RecipeAdmin/index";
+import { useGetRecipes } from "hooks";
+import { useRecoilState } from "recoil";
+import { recipesListState } from "state";
 
 function AdminRecipesList() {
-  const [[recipes, setRecipes]] = useGetRecipes();
+  useGetRecipes();
+  const [recipes, setRecipes] = useRecoilState(recipesListState);
 
   return (
     <div className={`${styles.adminRecipesList} flex-fill`}>

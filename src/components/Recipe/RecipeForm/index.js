@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createRecipe, updateRecipe } from "api";
 import styles from "./RecipeForm.module.scss";
+import { useRecoilValue } from "recoil";
+import { recipeItemSelector } from "state";
 
 function RecipeForm() {
   const navigate = useNavigate();
-  const currentRecipe = useLoaderData();
+  const { id } = useParams();
+  const currentRecipe = useRecoilValue(recipeItemSelector(id));
 
   const recipeSchema = yup.object({
     title: yup
@@ -15,11 +18,7 @@ function RecipeForm() {
       .nullable()
       .required("Le champ est obligatoire.")
       .min(4, "Le titre doit faire au moins 4 caractères."),
-    image: yup
-      .string()
-      .nullable()
-      .required("Le champ est obligatoire.")
-      .url("Le champ doit être une URL valide."),
+    image: yup.string().nullable().required("Le champ est obligatoire."),
   });
 
   const defaultValues = {

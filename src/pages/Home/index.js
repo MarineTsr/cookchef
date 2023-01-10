@@ -7,19 +7,19 @@ import {
   updateRecipe as apiUpdateRecipe,
   deleteRecipe as apiDeleteRecipe,
 } from "api";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { filteredRecipesSelector, recipesListState } from "state";
 import styles from "./Home.module.scss";
 
 function Home() {
   const [pagination, setPagination] = useState(1);
   const [filter, setFilter] = useState("");
   const RECIPE_LIST_JUMP = 8;
-  const RECIPE_LIST_LENGHT = 40; // Fake value, to prevent fetching results without pagination - to be updated later
+  const [isLoading] = useGetRecipes(pagination, RECIPE_LIST_JUMP);
 
-  // Fetching datas
-  const [[recipeList, setRecipeList], isLoading] = useGetRecipes(
-    pagination,
-    RECIPE_LIST_JUMP
-  );
+  // Recoil datas
+  const filteredRecipes = useRecoilValue(filteredRecipesSelector(filter));
+  const setRecipesList = useSetRecoilState(recipesListState);
 
   // Favorites
   const updateRecipe = async (item, event) => {
@@ -27,8 +27,8 @@ function Home() {
 
     const recipe = await apiUpdateRecipe(item);
 
-    setRecipeList(
-      recipeList.map((item) => (item._id === recipe._id ? recipe : item))
+    setRecipesList(
+      filteredRecipes.map((item) => (item._id === recipe._id ? recipe : item))
     );
   };
 
@@ -38,8 +38,8 @@ function Home() {
 
     await apiDeleteRecipe(item._id);
 
-    setRecipeList(
-      recipeList.filter((currentItem) => currentItem._id !== item._id)
+    setRecipesList(
+      filteredRecipes.filter((currentItem) => currentItem._id !== item._id)
     );
   };
 
@@ -52,51 +52,34 @@ function Home() {
 
         <SearchBar setFilter={setFilter} />
 
-        {isLoading && !recipeList.length ? (
+        {isLoading && !filteredRecipes.length ? (
           <Loader classes="mt-5 pt-5" />
         ) : (
           <div className={`${styles.recipeList}`}>
             <ul className="row p-3 mt-5">
-              {filter &&
-              !recipeList.filter((item) =>
-                item.title.toLowerCase().includes(filter)
-              ).length ? (
-                <li className="col-12 text-center">
-                  Aucune recette ne correspond à votre recherche
+              {filteredRecipes.map((item) => (
+                <li
+                  key={item._id}
+                  className="col-12 col-sm-6 col-md-4 col-xl-3"
+                >
+                  <RecipeSummary
+                    item={item}
+                    favoriteHandler={updateRecipe}
+                    deleteHandler={deleteRecipe}
+                  />
                 </li>
-              ) : (
-                recipeList
-                  .filter((item) => item.title.toLowerCase().includes(filter))
-                  .map((item) => (
-                    <li
-                      key={item._id}
-                      className="col-12 col-sm-6 col-md-4 col-xl-3"
-                    >
-                      <RecipeSummary
-                        item={item}
-                        favoriteHandler={updateRecipe}
-                        deleteHandler={deleteRecipe}
-                      />
-                    </li>
-                  ))
-              )}
+              ))}
             </ul>
 
-            {recipeList.filter((item) =>
-              item.title.toLowerCase().includes(filter)
-            ).length &&
-            pagination * RECIPE_LIST_JUMP <=
-              RECIPE_LIST_LENGHT - RECIPE_LIST_JUMP ? (
-              <div className="d-flex justify-content-center pb-5">
-                <button
-                  type="button"
-                  className="btn btn--filled btn--primary"
-                  onClick={() => setPagination(pagination + 1)}
-                >
-                  Plus de recettes
-                </button>
-              </div>
-            ) : null}
+            <div className="d-flex justify-content-center pb-5">
+              <button
+                type="button"
+                className="btn btn--filled btn--primary"
+                onClick={() => setPagination(pagination + 1)}
+              >
+                Plus de recettes
+              </button>
+            </div>
           </div>
         )}
       </div>

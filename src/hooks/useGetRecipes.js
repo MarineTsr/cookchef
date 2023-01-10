@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { getRecipes } from "api";
+import { useSetRecoilState } from "recoil";
+import { recipesListState } from "state";
 
 export const useGetRecipes = (pagination, jump) => {
-  const [recipes, setRecipes] = useState([]);
+  const setRecipes = useSetRecoilState(recipesListState);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +22,11 @@ export const useGetRecipes = (pagination, jump) => {
 
         const recipesList = await getRecipes(urlParams);
         if (!ignoreResponse) {
-          setRecipes((current) => [...current, ...recipesList]);
+          if (pagination && pagination !== 1) {
+            setRecipes((old) => [...old, ...recipesList]);
+          } else {
+            setRecipes(recipesList);
+          }
         }
       } catch (e) {
         console.error(e);
@@ -34,7 +40,7 @@ export const useGetRecipes = (pagination, jump) => {
     return () => {
       ignoreResponse = true;
     };
-  }, [pagination, jump]);
+  }, [setRecipes, pagination, jump]);
 
-  return [[recipes, setRecipes], isLoading];
+  return [isLoading];
 };
