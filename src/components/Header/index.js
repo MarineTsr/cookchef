@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import logo from "assets/images/cookchef.png";
+import { useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation();
+
   return (
     <header
       className={`${styles.headerMain} d-flex flex-row align-items-center justify-content-between`}
@@ -26,14 +29,16 @@ function Header() {
           <i className="icon fa-solid fa-circle-plus"></i>
           <span className="ml-2 d-none d-sm-inline">Admin</span>
         </NavLink>
-        <button
-          type="button"
-          className="btn btn--outlined btn--primary ml-3 ml-lg-4"
-          title="Ma wishlist"
-        >
-          <i className="icon fa-solid fa-heart"></i>
-          <span className="ml-2 d-none d-sm-inline">Ma wishlist</span>
-        </button>
+        {location.pathname === "/" && (
+          <button
+            type="button"
+            className="btn btn--outlined btn--primary ml-3 ml-lg-4"
+            title="Ma wishlist"
+          >
+            <i className="icon fa-solid fa-heart"></i>
+            <span className="ml-2 d-none d-sm-inline">Ma wishlist</span>
+          </button>
+        )}
       </div>
     </header>
   );

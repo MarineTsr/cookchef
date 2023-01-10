@@ -2,6 +2,7 @@ import { useState } from "react";
 import SearchBar from "components/SearchBar";
 import Loader from "components/Layout/Loader";
 import RecipeSummary from "components/Recipe/RecipeSummary";
+import Wishlist from "components/Wishlist";
 import { useGetRecipes } from "hooks";
 import {
   updateRecipe as apiUpdateRecipe,
@@ -83,6 +84,8 @@ function Home() {
           </div>
         )}
       </div>
+
+      {/* <Wishlist /> */}
     </main>
   );
 }
