@@ -13,7 +13,7 @@ function RecipeAdmin({ recipe, recipes, setRecipes }) {
   return (
     <div className={`${styles.recipeAdmin__container}`}>
       <p>{recipe.title}</p>
-      <div className={`${styles.recipeAdmin__actions}`}>
+      <div className={`${styles.recipeAdmin__actions} mb-4 mb-sm-0`}>
         <NavLink
           to={`/admin/recettes/modifier/${recipe._id}`}
           className="btn btn--filled btn--dark ml-3"
