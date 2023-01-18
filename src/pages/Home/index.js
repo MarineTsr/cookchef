@@ -9,7 +9,11 @@ import {
   deleteRecipe as apiDeleteRecipe,
 } from "api";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { filteredRecipesSelector, recipesListState } from "state";
+import {
+  filteredRecipesSelector,
+  recipesListState,
+  showWishlistState,
+} from "state";
 import styles from "./Home.module.scss";
 
 function Home() {
@@ -21,6 +25,7 @@ function Home() {
   // Recoil datas
   const filteredRecipes = useRecoilValue(filteredRecipesSelector(filter));
   const setRecipesList = useSetRecoilState(recipesListState);
+  const showWishlisth = useRecoilValue(showWishlistState);
 
   // Favorites
   const updateRecipe = async (item, event) => {
@@ -85,7 +90,7 @@ function Home() {
         )}
       </div>
 
-      {/* <Wishlist /> */}
+      {showWishlisth && <Wishlist favoriteHandler={updateRecipe} />}
     </main>
   );
 }

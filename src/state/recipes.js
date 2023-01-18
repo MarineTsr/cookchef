@@ -1,4 +1,4 @@
-import { atom, selectorFamily } from "recoil";
+import { atom, selectorFamily, selector } from "recoil";
 import { getRecipe } from "api";
 
 // Recipes list
@@ -28,4 +28,19 @@ export const recipeItemSelector = selectorFamily({
     async ({ get }) => {
       return _id && (await getRecipe(_id));
     },
+});
+
+// Recipes wishlist display
+export const showWishlistState = atom({
+  key: "showWishlistState",
+  default: false,
+});
+
+// Wishlist recipes list
+export const wishlistRecipesSelector = selector({
+  key: "wishlistRecipesSelector",
+  get: ({ get }) => {
+    const recipes = get(recipesListState);
+    return recipes.filter((item) => item.isFavorite);
+  },
 });

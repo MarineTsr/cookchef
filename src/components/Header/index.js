@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import logo from "assets/images/cookchef.png";
 import { useLocation } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { showWishlistState } from "state";
 
 function Header() {
   const location = useLocation();
+  const setShowWishlist = useSetRecoilState(showWishlistState);
 
   return (
     <header
@@ -34,6 +37,7 @@ function Header() {
             type="button"
             className="btn btn--outlined btn--primary ml-3 ml-lg-4"
             title="Ma wishlist"
+            onClick={() => setShowWishlist(true)}
           >
             <i className="icon fa-solid fa-heart"></i>
             <span className="ml-2 d-none d-sm-inline">Ma wishlist</span>

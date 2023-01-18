@@ -18,9 +18,18 @@
 	backdrop-filter: blur(1px);
 
 	&__container {
+		width: 360px;
+		max-width: 100%;
 		padding: $gutter-default;
+		margin-bottom: $gutter-default;
+		margin-right: $gutter-default;
 		border-radius: $radius-default;
 		background-color: fn.getColor($theme-colorscheme, light, main);
 		color: fn.getColor($theme-colorscheme, light, text);
+	}
+
+	ul {
+		max-height: 200px;
+		overflow-y: auto;
 	}
 }
