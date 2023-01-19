@@ -14,6 +14,7 @@ import {
   recipesListState,
   showWishlistState,
 } from "state";
+import AnimationFade from "components/Animation/AnimationFade";
 import styles from "./Home.module.scss";
 
 function Home() {
@@ -25,7 +26,7 @@ function Home() {
   // Recoil datas
   const filteredRecipes = useRecoilValue(filteredRecipesSelector(filter));
   const setRecipesList = useSetRecoilState(recipesListState);
-  const showWishlisth = useRecoilValue(showWishlistState);
+  const showWishlist = useRecoilValue(showWishlistState);
 
   // Favorites
   const updateRecipe = async (item, event) => {
@@ -90,7 +91,13 @@ function Home() {
         )}
       </div>
 
-      {showWishlisth && <Wishlist favoriteHandler={updateRecipe} />}
+      <AnimationFade
+        visibility={showWishlist}
+        timeout={350}
+        classes="relative index-10"
+      >
+        <Wishlist favoriteHandler={updateRecipe} />
+      </AnimationFade>
     </main>
   );
 }

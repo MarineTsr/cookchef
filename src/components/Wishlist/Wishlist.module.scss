@@ -14,11 +14,10 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
-	background-color: rgba(0, 0, 0, 0.2);
-	backdrop-filter: blur(1px);
 
 	&__container {
-		width: 360px;
+		position: relative;
+		width: 430px;
 		max-width: 100%;
 		padding: $gutter-default;
 		margin-bottom: $gutter-default;
@@ -26,6 +25,7 @@
 		border-radius: $radius-default;
 		background-color: fn.getColor($theme-colorscheme, light, main);
 		color: fn.getColor($theme-colorscheme, light, text);
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.45);
 	}
 
 	ul {

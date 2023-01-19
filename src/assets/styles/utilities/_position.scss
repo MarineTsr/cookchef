@@ -1,0 +1,21 @@
+/*------------------
+	POSITION
+-------------------*/
+
+// POSITION ---
+$position: absolute, fixed, inherit, relative, static, sticky;
+
+@each $p in $position {
+	.#{$p} {
+		position: $p;
+	}
+}
+
+// INDEX ---
+$index: 0, 1, 10, 100, 1000;
+
+@each $i in $index {
+	.index-#{$i} {
+		z-index: $i;
+	}
+}
