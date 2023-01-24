@@ -1,22 +1,24 @@
 import styles from "./SearchBar.module.scss";
+import {ChangeEvent} from "react";
 
-function SearchBar({ setFilter }) {
-  const handleInput = (event) => {
-    const filter = event.target.value.trim().toLowerCase();
-    setFilter(filter);
-  };
+function SearchBar({setFilter}: { setFilter: (filter: string) => void }) {
+    const handleInput = (value: string) => {
+        const filter = value.trim().toLowerCase();
+        setFilter(filter);
+    };
 
-  return (
-    <form className={`${styles.mainSearch}`}>
-      <input type="text" placeholder="Je recherche..." onInput={handleInput} />
-      <span
-        className={`${styles.mainSearchBtn} btn btn--filled btn--primaryReverse no-hover`}
-        title="Rechercher"
-      >
+    return (
+        <form className={`${styles.mainSearch}`}>
+            <input type="text" placeholder="Je recherche..."
+                   onInput={(event: ChangeEvent<HTMLInputElement>) => handleInput(event.target.value)}/>
+            <span
+                className={`${styles.mainSearchBtn} btn btn--filled btn--primaryReverse no-hover`}
+                title="Rechercher"
+            >
         <i className="fa-solid fa-magnifying-glass"></i>
       </span>
-    </form>
-  );
+        </form>
+    );
 }
 
 export default SearchBar;

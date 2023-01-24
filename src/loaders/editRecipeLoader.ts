@@ -1,5 +1,10 @@
-import { getRecipe } from "api";
+import {getRecipe} from "api";
 
-export const editRecipeLoader = async ({ params: { id } }) => {
-  return getRecipe(id);
+type LoaderParams = {
+    params: {
+        id: string
+    }
+}
+export const editRecipeLoader = async ({params: {id}}: LoaderParams) => {
+    return getRecipe(id);
 };
